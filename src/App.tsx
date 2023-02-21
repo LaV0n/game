@@ -1,76 +1,115 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Canvas} from "./features/Canvas/Canvas";
+
+
+const width = 8
+const candyColor = [
+    'blue',
+    'green',
+    'orange',
+    'purple',
+    'red',
+    'yellow'
+]
 
 function App() {
 
-    class InputHandler{
+    const [currentColorArray, setCurrentColorArray] = useState<Array<string>>([])
 
-    }
-    class ProjectTitle{}
-    class Particle{}
-    class Plqyer{
-        game:any;
-        width:number;
-        height:number;
-        x:number;
-        y:number;
-        speedY:number
-        constructor(game:any) {
-            this.game=game;
-            this.width=120;
-            this.height=190;
-            this.x=20;
-            this.y=100;
-            this.speedY=0.2;
+    const createBoard = () => {
+        const randomColorArray = []
+        for (let i = 0; i < width ** 2; i++) {
+            randomColorArray.push(candyColor[Math.floor(Math.random() * candyColor.length)])
         }
-        updade(){
-            this.y +=this.speedY;
-        }
-        draw(context:CanvasRenderingContext2D){
-            context.fillRect(this.x,this.y,this.width, this.height);
-        }
-    }
-    class Enemy{}
-    class Layer{}
-    class Backfround{}
-    class UI{}
-    class Game{
-        width:number;
-        height:number;
-        player: any
-        constructor(width:number,height:number) {
-            this.width=width;
-            this.height=height;
-            this.player= new Plqyer(this);
-        }
-        update(){
-            this.player.updade();
-        }
-        draw(context:any){
-            this.player.draw(context)
-        }
-    }
-    const game= new Game(window.innerWidth,400)
-
-    function animate(ctx:CanvasRenderingContext2D){
-        game.update();
-        game.draw(ctx)
-        requestAnimationFrame(()=>animate(ctx))
-        ctx.clearRect(0,0,500,500)
-    }
-    const drawArt=(ctx:CanvasRenderingContext2D)=> {
-        ctx.fillStyle = 'green';
-        ctx.fillRect(0, 0, 120, 100)
-        ctx.strokeRect(120,100,50,50)
+        setCurrentColorArray(randomColorArray)
     }
 
-  return (
-    <div className="App">
-      <Canvas width={window.innerWidth} height={400} draw={drawArt}/>
-      <Canvas width={window.innerWidth} height={400} draw={animate}/>
-    </div>
-  );
+    const checkForColumOfThree=()=>{
+        for(let i=0;i<47;i++){
+            const columOfThree=[i,i+width,i+width*2]
+            const decideColor=currentColorArray[i]
+            if(columOfThree.every(item=>currentColorArray[item]===decideColor)){
+                columOfThree.forEach(item=>currentColorArray[item]='')
+            }
+        }
+    }
+    const checkForColumOfFour=()=>{
+        for(let i=0;i<39;i++){
+            const columOfFour=[i,i+width,i+width*2,i+width*3]
+            const decideColor=currentColorArray[i]
+            if(columOfFour.every(item=>currentColorArray[item]===decideColor)){
+                columOfFour.forEach(item=>currentColorArray[item]='')
+            }
+        }
+    }
+    const checkForRowOfThree=()=>{
+        for(let i=0;i<64;i++){
+            const rowOfThree=[i,i+1,i+2]
+            const decideColor=currentColorArray[i]
+            const notValid=new Array(64).filter(i=>i===width-1 ||i===width-2)
+            if (notValid.includes(i)) continue
+            if(rowOfThree.every(item=>currentColorArray[item]===decideColor)){
+                rowOfThree.forEach(item=>currentColorArray[item]='')
+            }
+        }
+    }
+    const checkForRowOfFour=()=>{
+        for(let i=0;i<64;i++){
+            const rowOfFour=[i,i+1,i+2,i+3]
+            const decideColor=currentColorArray[i]
+            const notValid=new Array(64).filter(i=>i===width-1 ||i===width-2 || i===width-3)
+            if (notValid.includes(i)) continue
+            if(rowOfFour.every(item=>currentColorArray[item]===decideColor)){
+                rowOfFour.forEach(item=>currentColorArray[item]='')
+            }
+        }
+    }
+    const moveIntoSquareBelow=()=>{
+        for (let i=0; i<64-width;i++){
+            const firstRow=[0,1,2,3,4,5,6,7]
+
+            if (firstRow.includes(i) && currentColorArray[i]===''){
+                let randomNumber=Math.floor(Math.random()*candyColor.length)
+                currentColorArray[i]=candyColor[randomNumber]
+            }
+            if(currentColorArray[i+width]===''){
+                currentColorArray[i+width]=currentColorArray[i]
+                currentColorArray[i]=''
+            }
+        }
+    }
+
+    useEffect(() => {
+        createBoard()
+    }, [])
+
+    useEffect(()=>{
+        const timer=setInterval(()=>{
+            checkForColumOfFour()
+            checkForColumOfThree()
+            checkForRowOfFour()
+            checkForRowOfThree()
+            moveIntoSquareBelow()
+            setCurrentColorArray([...currentColorArray])
+            console.log('12')
+        },500)
+       return ()=>clearInterval(timer)
+    },[checkForColumOfFour,checkForColumOfThree,
+        checkForRowOfThree,currentColorArray,checkForRowOfFour,
+        moveIntoSquareBelow])
+
+    return (
+        <div className="App">
+            <div className="game">
+                {currentColorArray.map((candyColor, index) =>
+                    <img key={index}
+                         style={{backgroundColor: candyColor}}
+                         //alt={candyColor}
+                    />
+                )}
+            </div>
+        </div>
+    );
 }
 
 export default App;
