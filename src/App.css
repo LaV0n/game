@@ -7,10 +7,14 @@
   height: 560px;
   display: flex;
   flex-wrap: wrap;
+  border: 1px solid black;
+  padding: 10px;
 }
 .game img{
-  width: 70px;
-  height: 70px;
+  width: 66px;
+  height: 66px;
+  border-radius: 33px;
+  margin: 2px;
 }
 
 
