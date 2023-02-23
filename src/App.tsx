@@ -4,10 +4,10 @@ import {noValidId} from "./common/utils/noValidId";
 import blueberries from './assets/icon/icons8-blueberries-96.png'
 import kiwi from './assets/icon/icons8-kiwi-fruit-96.png'
 import orange from  './assets/icon/icons8-tangerine-96.png'
-import apple from './assets/icon/icons8-apple-94.png'
+import apple from './assets/icon/icons8-apple-96.png'
 import cherry from './assets/icon/icons8-cherries-96.png'
-import pineapple from './assets/icon/icons8-pineapple-96.png'
 import cart from './assets/icon/icons8-shopping-cart-64.png'
+import banana from  './assets/icon/icons8-banana-96.png'
 
 export const width = 8
 const candyColor = [
@@ -16,7 +16,7 @@ const candyColor = [
     orange,
     apple,
     cherry,
-    pineapple
+    banana
 ]
 
 type ElementType = {
