@@ -1,4 +1,5 @@
-import { width } from "../../App";
+import { width } from "../../features/CandyCash/Board/Board";
+
 
 export const noValidId = (rowLength:number) => {
     let result = []

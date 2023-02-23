@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    padding: 30px;
+}
+.game{
+    width: 560px;
+    height: 560px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.fruit{
+    width: 66px;
+    height: 66px;
+    margin: 2px;
+}
