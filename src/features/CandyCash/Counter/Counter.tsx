@@ -9,7 +9,7 @@ export const Counter = ({count}:CounterType) => {
     return (
         <div className={styles.container}>
             <div className={styles.title}>
-                Number of purchased fruits:
+                Number of fruits in the cart:
             </div>
             <div className={styles.count}>
                 {count}
