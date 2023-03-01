@@ -9,14 +9,14 @@ import {draw} from "./draw/draw";
 export const Snake = () => {
 
     const canvasRef=useRef<HTMLCanvasElement>(null)
-    const {snakeBody}=useGameLogic()
+    const {snakeBody,onKeyDownHandler}=useGameLogic()
 
     const drawGame=(ctx:CanvasRenderingContext2D)=>{
         draw({ctx,snakeBody})
     }
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} onKeyDown={onKeyDownHandler} tabIndex={0}>
             <Link to="/" className={styles.homeLink}>
                 <img src={homeIcon} alt="0"/>
             </Link>
