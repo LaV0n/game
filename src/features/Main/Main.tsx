@@ -12,6 +12,11 @@ export const Main = () => {
                     3 in line
                 </div>
             </Link>
+            <Link to="/snake" className={styles.linkBlock}  style={{backgroundImage:`url(${inLine}`}}>
+                <div className={styles.title}>
+                    snake
+                </div>
+            </Link>
         </div>
     );
 };

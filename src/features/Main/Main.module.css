@@ -8,6 +8,7 @@
     background-image: url("https://img.freepik.com/free-vector/dark-hexagonal-background-with-gradient-color_79603-1409.jpg?w=1380&t=st=1677569328~exp=1677569928~hmac=d8ee98df66e7fffd701bbbc20919e36dca1a7c2952ecf036db4b3593c4624d16");
     background-repeat: no-repeat;
     background-size: cover;
+    gap:20px;
 }
 
 h1 {
