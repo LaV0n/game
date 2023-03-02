@@ -3,6 +3,7 @@ import {useInterval} from "../../utils/useInterval";
 import {createSnakeMovement, hasSnakeEatItself, willSnakeHitTheFood} from "./movement";
 import {SEGMENT_SIZE} from "./draw/draw";
 import {randomPositionOnGrid} from "../../utils/randomPositionOnGrid";
+import {GameState} from "./Snake";
 
 export type PositionType = {
     x: number
@@ -19,10 +20,11 @@ interface UseGameLogicArgs {
     canvasWidth?: number
     canvasHeight?: number
     onGameOver:()=>void
+    gameState:GameState
 }
 
-export const useGameLogic = ({canvasWidth, canvasHeight,onGameOver}: UseGameLogicArgs) => {
-    const [snakeBody, setSnakeBody] = useState<PositionType[]>([{x: 0, y: 0}])
+export const useGameLogic = ({canvasWidth, canvasHeight,onGameOver,gameState}: UseGameLogicArgs) => {
+    const [snakeBody, setSnakeBody] = useState<PositionType[]>([{x: 200, y: 100}])
     const [direction, setDirection] = useState<Direction>()
 
     const {moveRight, moveLeft, moveDown, moveUp} = createSnakeMovement()
@@ -38,6 +40,18 @@ export const useGameLogic = ({canvasWidth, canvasHeight,onGameOver}: UseGameLogi
             y: randomPositionOnGrid({ threshold: canvasHeight})
         })
     }, [canvasHeight, canvasWidth])
+
+    const resetGameState=()=>{
+        setDirection(undefined)
+        setSnakeBody([{
+            x: randomPositionOnGrid({threshold: canvasWidth!}),
+            y: randomPositionOnGrid({threshold: canvasHeight!})
+        }])
+        setFoodPosition({
+            x: randomPositionOnGrid({ threshold: canvasWidth!}),
+            y: randomPositionOnGrid({ threshold: canvasHeight!})
+        })
+    }
 
     const onKeyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
         switch (event.code) {
@@ -135,12 +149,15 @@ export const useGameLogic = ({canvasWidth, canvasHeight,onGameOver}: UseGameLogi
         }
     }
 
-    useInterval(moveSnake, MOVEMENT_SPEED)
+    useInterval(moveSnake, gameState===GameState.RUNNING
+        ? MOVEMENT_SPEED
+        : null)
 
     return {
         snakeBody,
         onKeyDownHandler,
-        foodPosition
+        foodPosition,
+        resetGameState
     }
 
 }

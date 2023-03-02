@@ -6,26 +6,38 @@ import {Canvas} from "./Canvas/Canvas";
 import {useGameLogic} from "./useGameLogic";
 import {draw} from "./draw/draw";
 
-enum GameState{
+export enum GameState {
     RUNNING,
-    GAME_OVER
+    GAME_OVER,
+    PAUSE
 }
 
 export const Snake = () => {
 
-    const canvasRef=useRef<HTMLCanvasElement>(null)
-    const [gameState,setGameState]=useState<GameState>(GameState.RUNNING)
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const [gameState, setGameState] = useState<GameState>(GameState.RUNNING)
 
-    const onGameOver=()=>setGameState(GameState.GAME_OVER)
+    const onGameOver = () => setGameState(GameState.GAME_OVER)
 
-    const {snakeBody,onKeyDownHandler,foodPosition}=useGameLogic({
-        canvasHeight:canvasRef.current?.height,
-        canvasWidth:canvasRef.current?.width,
-        onGameOver
+    const {snakeBody, onKeyDownHandler, foodPosition,resetGameState} = useGameLogic({
+        canvasHeight: canvasRef.current?.height,
+        canvasWidth: canvasRef.current?.width,
+        onGameOver,
+        gameState,
     })
 
-    const drawGame=(ctx:CanvasRenderingContext2D)=>{
-        draw({ctx,snakeBody,foodPosition})
+    const drawGame = (ctx: CanvasRenderingContext2D) => {
+        draw({ctx, snakeBody, foodPosition})
+    }
+
+    const playAgainHandler = () => {
+        setGameState(GameState.RUNNING)
+        resetGameState()
+    }
+    const pauseButtonHandler=()=>{
+        gameState===GameState.RUNNING
+            ? setGameState(GameState.PAUSE)
+            :setGameState(GameState.RUNNING)
     }
 
     return (
@@ -34,6 +46,13 @@ export const Snake = () => {
                 <img src={homeIcon} alt="0"/>
             </Link>
             <Canvas ref={canvasRef} draw={drawGame}/>
+            {gameState === GameState.GAME_OVER
+                ? (<button onClick={playAgainHandler}>Play Again</button>)
+                : (<button onClick={pauseButtonHandler}>
+                    {gameState===GameState.RUNNING
+                    ?'pause'
+                    :'play'}
+                </button>)}
         </div>
     );
 };
