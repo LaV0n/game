@@ -1,36 +1,40 @@
 import React, {forwardRef, useEffect} from 'react';
 import * as S from './Canvas.styles'
 
-type CanvasType=React.DetailedHTMLProps<React.CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement> & {
-    draw:(context:CanvasRenderingContext2D)=>void
+type CanvasType = React.DetailedHTMLProps<React.CanvasHTMLAttributes<HTMLCanvasElement>, HTMLCanvasElement> & {
+    draw: (context: CanvasRenderingContext2D) => void
 }
 
-export const Canvas= forwardRef<HTMLCanvasElement,CanvasType>(
-    ({draw,...props},canvasRef) => {
+export const Canvas = forwardRef<HTMLCanvasElement, CanvasType>(
+    ({draw, ...props}, canvasRef) => {
 
-        useEffect(()=>{
+        useEffect(() => {
 
-            if(!canvasRef){
+            if (!canvasRef) {
                 return
             }
-            const canvas=(canvasRef as React.RefObject<HTMLCanvasElement>).current
-            if(!canvas){
+            const canvas = (canvasRef as React.RefObject<HTMLCanvasElement>).current
+            if (!canvas) {
                 return;
             }
 
-            const context=canvas.getContext('2d')
-            if(!context){return;}
+            const context = canvas.getContext('2d')
+            if (!context) {
+                return;
+            }
 
-            draw(context)
+            draw(context);
 
-        },[draw,canvasRef])
+            return () => context.clearRect(0, 0, window.innerWidth, 400)
 
-        if(!canvasRef){
+        }, [draw, canvasRef])
+
+        if (!canvasRef) {
             return null
         }
 
-    return (
-        <S.Canvas ref={canvasRef as any} {...props}/>
-    );
-});
+        return (
+            <S.Canvas width={400} height={200} ref={canvasRef as any} {...props} />
+        );
+    });
 

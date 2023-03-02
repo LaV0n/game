@@ -5,24 +5,24 @@ export const createSnakeMovement = (gridSize = 5) => ({
         const bodyCopy = [...snakeBody]
         const headPos = bodyCopy[bodyCopy.length - 1]
         bodyCopy.shift()
-        return[...snakeBody,{...headPos,x:headPos.x+gridSize}]
+        return[...bodyCopy,{...headPos,x:headPos.x+gridSize}]
     },
     moveLeft: (snakeBody: PositionType[]) => {
         const bodyCopy = [...snakeBody]
         const headPos = bodyCopy[bodyCopy.length - 1]
         bodyCopy.shift()
-        return[...snakeBody,{...headPos,x:headPos.x-gridSize}]
+        return[...bodyCopy,{...headPos,x:headPos.x-gridSize}]
     },
     moveUp: (snakeBody: PositionType[]) => {
         const bodyCopy = [...snakeBody]
         const headPos = bodyCopy[bodyCopy.length - 1]
         bodyCopy.shift()
-        return[...snakeBody,{...headPos,y:headPos.y-gridSize}]
+        return[...bodyCopy,{...headPos,y:headPos.y-gridSize}]
     },
     moveDown: (snakeBody: PositionType[]) => {
         const bodyCopy = [...snakeBody]
         const headPos = bodyCopy[bodyCopy.length - 1]
         bodyCopy.shift()
-        return[...snakeBody,{...headPos,y:headPos.y+gridSize}]
+        return[...bodyCopy,{...headPos,y:headPos.y+gridSize}]
     },
 })

@@ -11,7 +11,7 @@ export enum Direction {
     UP, DOWN, LEFT, RIGHT
 }
 
-const MOVEMENT_SPEED = 500;
+const MOVEMENT_SPEED = 100;
 
 export const useGameLogic = () => {
     const [snakeBody, setSnakeBody] = useState<PositionType[]>([{x: 0, y: 0}])
