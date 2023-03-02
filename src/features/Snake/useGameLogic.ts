@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useInterval} from "../../utils/useInterval";
-import {createSnakeMovement} from "./movement";
+import {createSnakeMovement, hasSnakeEatItself, willSnakeHitTheFood} from "./movement";
+import {SEGMENT_SIZE} from "./draw/draw";
+import {randomPositionOnGrid} from "../../utils/randomPositionOnGrid";
 
 export type PositionType = {
     x: number
@@ -13,46 +15,122 @@ export enum Direction {
 
 const MOVEMENT_SPEED = 100;
 
-export const useGameLogic = () => {
+interface UseGameLogicArgs {
+    canvasWidth?: number
+    canvasHeight?: number
+    onGameOver:()=>void
+}
+
+export const useGameLogic = ({canvasWidth, canvasHeight,onGameOver}: UseGameLogicArgs) => {
     const [snakeBody, setSnakeBody] = useState<PositionType[]>([{x: 0, y: 0}])
     const [direction, setDirection] = useState<Direction>()
 
-    const {moveRight,moveLeft,moveDown,moveUp}=createSnakeMovement()
+    const {moveRight, moveLeft, moveDown, moveUp} = createSnakeMovement()
+    const snakeHeadPosition = snakeBody[snakeBody.length - 1]
+    const [foodPosition, setFoodPosition] = useState<PositionType | undefined>()
+
+    useEffect(() => {
+        if (!canvasHeight || !canvasWidth) {
+            return
+        }
+        setFoodPosition({
+            x: randomPositionOnGrid({ threshold: canvasWidth}),
+            y: randomPositionOnGrid({ threshold: canvasHeight})
+        })
+    }, [canvasHeight, canvasWidth])
 
     const onKeyDownHandler = (event: React.KeyboardEvent<HTMLDivElement>) => {
         switch (event.code) {
             case 'KeyS':
-                setDirection(Direction.DOWN)
+                if (direction !== Direction.UP) {
+                    setDirection(Direction.DOWN)
+                }
                 break;
             case 'KeyW':
-                setDirection(Direction.UP)
+                if (direction !== Direction.DOWN) {
+                    setDirection(Direction.UP)
+                }
                 break;
             case 'KeyA':
-                setDirection(Direction.LEFT)
+                if (direction !== Direction.RIGHT) {
+                    setDirection(Direction.LEFT)
+                }
                 break;
             case 'KeyD':
-                setDirection(Direction.RIGHT)
+                if (direction !== Direction.LEFT) {
+                    setDirection(Direction.RIGHT)
+                }
                 break;
         }
     }
 
     const moveSnake = () => {
-        let snakeBodyAfterMovement:PositionType[] | undefined
-        switch (direction){
+        let snakeBodyAfterMovement: PositionType[] | undefined
+        switch (direction) {
             case Direction.UP:
-                snakeBodyAfterMovement=moveUp(snakeBody)
+                if (snakeHeadPosition.y > 0) {
+                    snakeBodyAfterMovement = moveUp(snakeBody)
+                } else if (canvasWidth && snakeHeadPosition.x > canvasWidth / 2) {
+                    setDirection(Direction.LEFT)
+                } else {
+                    setDirection(Direction.RIGHT)
+                }
                 break;
             case Direction.DOWN:
-                snakeBodyAfterMovement= moveDown(snakeBody)
+                if (canvasHeight && snakeHeadPosition.y > canvasHeight - SEGMENT_SIZE * 2) {
+                    if (canvasWidth && snakeHeadPosition.x > canvasWidth / 2) {
+                        setDirection(Direction.LEFT)
+                    } else {
+                        setDirection(Direction.RIGHT)
+                    }
+                } else {
+                    snakeBodyAfterMovement = moveDown(snakeBody)
+                }
                 break;
             case Direction.RIGHT:
-                snakeBodyAfterMovement=moveRight(snakeBody)
+                if (canvasWidth && snakeHeadPosition.x > canvasWidth - SEGMENT_SIZE * 2) {
+                    if (canvasHeight && snakeHeadPosition.y > canvasHeight / 2) {
+                        setDirection(Direction.UP)
+                    } else {
+                        setDirection(Direction.DOWN)
+                    }
+                } else {
+                    snakeBodyAfterMovement = moveRight(snakeBody)
+                }
                 break;
             case Direction.LEFT:
-                snakeBodyAfterMovement=moveLeft(snakeBody)
+                if (snakeHeadPosition.x > 0) {
+                    snakeBodyAfterMovement = moveLeft(snakeBody)
+                } else if (canvasHeight && snakeHeadPosition.y > canvasHeight / 2) {
+                    setDirection(Direction.UP)
+                } else {
+                    setDirection(Direction.DOWN)
+                }
                 break;
         }
-        if(snakeBodyAfterMovement) {
+
+        //snake eats itself
+        if(snakeBodyAfterMovement){
+            const isGameOver=hasSnakeEatItself(snakeBodyAfterMovement)
+            if(isGameOver){
+                onGameOver()
+            }
+        }
+
+        if (direction !== undefined &&
+            foodPosition &&
+            willSnakeHitTheFood({
+                foodPosition, snakeHeadPosition, direction
+            })) {
+            setSnakeBody([
+                ...snakeBodyAfterMovement!,
+                {x:foodPosition.x,y:foodPosition.y}
+            ])
+            setFoodPosition({
+                x: randomPositionOnGrid({ threshold: canvasWidth!}),
+                y: randomPositionOnGrid({ threshold: canvasHeight!})
+            })
+        }else  if (snakeBodyAfterMovement) {
             setSnakeBody(snakeBodyAfterMovement)
         }
     }
@@ -61,7 +139,8 @@ export const useGameLogic = () => {
 
     return {
         snakeBody,
-        onKeyDownHandler
+        onKeyDownHandler,
+        foodPosition
     }
 
 }
