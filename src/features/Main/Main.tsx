@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import styles from './Main.module.css'
 import inLine from '../../assets/img/3inline.png'
+import snakeGame from '../../assets/img/snake.png'
 
 export const Main = () => {
     return (
@@ -12,7 +13,7 @@ export const Main = () => {
                     3 in line
                 </div>
             </Link>
-            <Link to="/snake" className={styles.linkBlock}  style={{backgroundImage:`url(${inLine}`}}>
+            <Link to="/snake" className={styles.linkBlock}  style={{backgroundImage:`url(${snakeGame}`}}>
                 <div className={styles.title}>
                     snake
                 </div>

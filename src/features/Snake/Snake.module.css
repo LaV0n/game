@@ -53,6 +53,7 @@
 }
 .wasdIcon{
     filter: invert(0.7);
+    width: 100%;
 }
 .endGameTitle{
     position: absolute;
@@ -62,7 +63,16 @@
     font-weight: 800;
     color: white;
 }
-
+.gameButton{
+    width: 90%;
+    border: 4px double black;
+    background-color: rgba(255, 255, 255, 0.6);
+    font-size: 25px;
+    border-radius: 15px;
+}
+.gameButton:hover{
+    background-color: rgba(255, 255, 255, 0.8);
+}
 .gameBlock {
     position: relative;
 }

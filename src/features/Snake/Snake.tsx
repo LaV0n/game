@@ -47,19 +47,20 @@ export const Snake = () => {
             <Link to="/" className={styles.homeLink}>
                 <img src={homeIcon} alt="0"/>
             </Link>
-            <div className={styles.gameBlock}>
+            <div className={styles.gameBlock} >
                 <div className={styles.storeBlock}>
                     <div className={styles.descriptionBlock}>
                         STORE:
                         <p className={styles.title}>{(snakeBody.length-1)*10}</p>
                     </div>
                     {gameState === GameState.GAME_OVER
-                        ? (<button onClick={playAgainHandler}>Play Again</button>)
+                        ? (<button onClick={playAgainHandler} className={styles.gameButton}>Play Again</button>)
                         : (<button onClick={pauseButtonHandler}
+                                   className={styles.gameButton}
                         >
                             {gameState===GameState.RUNNING
-                                ?'pause'
-                                :'play'}
+                                ?'Pause'
+                                :'Play'}
                         </button>)}
                     <div className={styles.descriptionBlock}>
                         <p className={styles.title}>For action use:</p>
