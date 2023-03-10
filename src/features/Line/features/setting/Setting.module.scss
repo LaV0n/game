@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../../../assets/img/sa_pixar_virtualbg_coco_16x9_9ccd7110.jpeg");
+  width: 100vw;
+  height: 100vh;
+
+  .block {
+    border: 10px solid #0c1d83;
+    border-radius: 40px;
+    width: 80vw;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.91);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    .slider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 20px;
+      font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+      gap: 20px;
+      width: 80%;
+
+      .direction {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 80%;
+
+        .directionButton {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 200px;
+          height: 50px;
+          border-radius: 25px;
+          background-color: #e0c51d;
+          font-weight: bold;
+          font-size: 20px;
+          border: none;
+
+          &:hover {
+            filter: opacity(50%);
+          }
+
+          &:disabled {
+            filter: opacity(40%);
+          }
+        }
+      }
+    }
+  }
+
+  .gameButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #28e70b;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+
+    &:hover {
+      filter: opacity(50%);
+    }
+  }
+}

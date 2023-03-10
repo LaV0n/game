@@ -1,0 +1,18 @@
+.container{
+  width: 100px;
+  height: 100px;
+  border-radius: 60px;
+  background-color: #e0c51d;
+  border: 10px solid #9a8713;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  color: wheat;
+  font-size: 24px;
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  z-index: 5;
+
+}

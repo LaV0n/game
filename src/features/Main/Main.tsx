@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import styles from './Main.module.css'
 import inLine from '../../assets/img/3inline.png'
 import snakeGame from '../../assets/img/snake.png'
+import lineGame from '../../assets/img/Screenshot_2.png'
 
 export const Main = () => {
     return (
@@ -16,6 +17,11 @@ export const Main = () => {
             <Link to="/snake" className={styles.linkBlock}  style={{backgroundImage:`url(${snakeGame}`}}>
                 <div className={styles.title}>
                     snake
+                </div>
+            </Link>
+            <Link to="/line" className={styles.linkBlock}  style={{backgroundImage:`url(${lineGame}`}}>
+                <div className={styles.title}>
+                    line
                 </div>
             </Link>
         </div>

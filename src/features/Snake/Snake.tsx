@@ -1,11 +1,10 @@
 import React, {useRef, useState} from 'react';
-import {Link} from "react-router-dom";
 import styles from "./Snake.module.css";
-import homeIcon from "../../assets/icon/icons8-home-page-64.png";
 import {Canvas} from "./Canvas/Canvas";
 import {useGameLogic} from "./useGameLogic";
 import {draw} from "./draw/draw";
 import wasdIcon from '../../assets/icon/icons8-клавиатура-64.png'
+import {HomeLink} from "../../common/HomeLink/HomeLink";
 
 export enum GameState {
     RUNNING,
@@ -44,9 +43,7 @@ export const Snake = () => {
 
     return (
         <div className={styles.container} onKeyDown={onKeyDownHandler} tabIndex={0}>
-            <Link to="/" className={styles.homeLink}>
-                <img src={homeIcon} alt="0"/>
-            </Link>
+           <HomeLink/>
             <div className={styles.gameBlock} >
                 <div className={styles.storeBlock}>
                     <div className={styles.descriptionBlock}>

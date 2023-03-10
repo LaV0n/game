@@ -8,13 +8,3 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.homeLink{
-    position: absolute;
-    top:10px;
-    left: 10px;
-    filter: invert(1);
-    opacity: 0.6;
-}
-.homeLink :hover{
-    filter: invert(0.5);
-}
