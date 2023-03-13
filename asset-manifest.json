@@ -1,17 +1,23 @@
 {
   "files": {
-    "main.css": "/game/static/css/main.ce9fd460.css",
-    "main.js": "/game/static/js/main.a4e4c0be.js",
+    "main.css": "/game/static/css/main.ffc39b8e.css",
+    "main.js": "/game/static/js/main.da0cd312.js",
     "static/js/787.6a541d2d.chunk.js": "/game/static/js/787.6a541d2d.chunk.js",
-    "static/media/snake.png": "/game/static/media/snake.14422c113aaf0fc2a116.png",
+    "static/media/background2.jpg": "/game/static/media/background2.d3988863e686961f17dc.jpg",
+    "static/media/sa_pixar_virtualbg_coco_16x9_9ccd7110.jpeg": "/game/static/media/sa_pixar_virtualbg_coco_16x9_9ccd7110.a57daa191ed19d0dc0ae.jpeg",
+    "static/media/snake.png": "/game/static/media/snake.6aae6f6000fe8be31cfe.png",
     "static/media/3inline.png": "/game/static/media/3inline.26d9a8e123e8acc497c4.png",
+    "static/media/Screenshot_2.png": "/game/static/media/Screenshot_2.73a90a583599bed85e83.png",
+    "static/media/pannel.jpg": "/game/static/media/pannel.8099cfa43c52c5cd3b6a.jpg",
+    "static/media/background3.jpg": "/game/static/media/background3.1bf1b795d95005fdfb50.jpg",
+    "static/media/right-arrow-svgrepo-com.svg": "/game/static/media/right-arrow-svgrepo-com.01331694cadcfc4be033712f4ef788de.svg",
     "index.html": "/game/index.html",
-    "main.ce9fd460.css.map": "/game/static/css/main.ce9fd460.css.map",
-    "main.a4e4c0be.js.map": "/game/static/js/main.a4e4c0be.js.map",
+    "main.ffc39b8e.css.map": "/game/static/css/main.ffc39b8e.css.map",
+    "main.da0cd312.js.map": "/game/static/js/main.da0cd312.js.map",
     "787.6a541d2d.chunk.js.map": "/game/static/js/787.6a541d2d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ce9fd460.css",
-    "static/js/main.a4e4c0be.js"
+    "static/css/main.ffc39b8e.css",
+    "static/js/main.da0cd312.js"
   ]
 }
