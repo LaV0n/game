@@ -12,6 +12,9 @@ Stack: *React/Redux-Toolkit/MUI/Axios/TypeScript/SASS/Styled-component/*
 ## CandyCash
 
 ![](https://github.com/LaV0n/game/blob/master/src/assets/img/3inline.png)
+## Snake
+
+![](https://github.com/LaV0n/game/blob/master/src/assets/img/snake.png)
 ## Line game
 
 ![](https://github.com/LaV0n/game/blob/master/src/assets/img/Screenshot_2.png)
