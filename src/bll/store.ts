@@ -1,11 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit"
-import {TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
-import { gameReducer } from "./gameReducer"
+import { configureStore } from '@reduxjs/toolkit'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { gameReducer } from './gameReducer'
 
-export const store=configureStore({
-    reducer:{
-        game:gameReducer
-    }
+export const store = configureStore({
+   reducer: {
+      game: gameReducer,
+   },
 })
 
 export type RootState = ReturnType<typeof store.getState>
