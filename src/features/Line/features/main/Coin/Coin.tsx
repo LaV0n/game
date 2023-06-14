@@ -1,4 +1,5 @@
 import styles from './Coin.module.scss'
+import React from 'react'
 
 type CoinProps = {
    coin: number | string

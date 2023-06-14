@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import styles from './Setting.module.scss'
 import { CustomSlider } from '../../common/CustomSlider'
 import { useAppDispatch, useAppSelector } from '../../../../bll/store'
+import React from 'react'
 import {
    setDirection,
    setInitialCoins,

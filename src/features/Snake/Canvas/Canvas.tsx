@@ -8,6 +8,7 @@ type CanvasType = React.DetailedHTMLProps<
    draw: (context: CanvasRenderingContext2D) => void
 }
 
+// eslint-disable-next-line react/display-name
 export const Canvas = forwardRef<HTMLCanvasElement, CanvasType>(({ draw, ...props }, canvasRef) => {
    useEffect(() => {
       if (!canvasRef) {

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Slider } from '@mui/material'
 
 type CustomSliderType = {

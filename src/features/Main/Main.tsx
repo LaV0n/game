@@ -30,6 +30,13 @@ export const Main = () => {
          >
             <div className={styles.title}>line</div>
          </Link>
+         <Link
+            to="/arkanoid"
+            className={styles.linkBlock}
+            style={{ backgroundImage: `url(${lineGame}` }}
+         >
+            <div className={styles.title}>arkanoid</div>
+         </Link>
       </div>
    )
 }
